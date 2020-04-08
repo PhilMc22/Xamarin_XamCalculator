@@ -1,26 +1,40 @@
-﻿public partial class MainPage : ContentPage
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace XamCalculator
 {
-    public MainPage()
+	// Learn more about making custom code visible in the Xamarin.Forms previewer
+	// by visiting https://aka.ms/xamarinforms-previewer
+	[DesignTimeVisible(false)]
+    public partial class MainPage : ContentPage
     {
-        InitializeComponent();
-
-        AddButton.Clicked += async (s, e) =>
+        public MainPage()
         {
-            int number1 = 0, number2 = 0;
+            InitializeComponent();
 
-            var success = int.TryParse(Number1.Text, out number1)
-                && int.TryParse(Number2.Text, out number2);
-
-            if (!success)
+            AddButton.Clicked += async (s, e) =>
             {
-                await DisplayAlert(
-                    "Error in inputs",
-                    "You must enter two integers", "OK");
-                return;
-            }
+                int number1 = 0, number2 = 0;
 
-            var result = number1 + number2;
-            Result.Text = result + $" {result.GetType()}";
-        };
+                var success = int.TryParse(Number1.Text, out number1)
+                    && int.TryParse(Number2.Text, out number2);
+
+                if (!success)
+                {
+                    await DisplayAlert(
+                        "Error in inputs",
+                        "You must enter two integers", "OK");
+                    return;
+                }
+
+                var result = number1 + number2;
+                Result.Text = result + $" {result.GetType()}";
+            };
+        }
     }
 }
